@@ -1,3 +1,4 @@
+// admin start
 .admin {
     &-wrapper {
         height: 100%;
@@ -9,7 +10,7 @@
         width: calc(100% - 175px);
         margin-left: 175px;
     }
-
+    // sidebar start
     &-sidebar {
         position: fixed;
         width: 175px;
@@ -26,6 +27,7 @@
             }
         }
 
+        // links start
         .links {
             ul {
                 margin: 0;
@@ -67,5 +69,12 @@
 
 
         }
+        // links end
+    }
+    // sidebar end
+
+    &-page {
+        padding: 16px;
     }
 }
+// admin end

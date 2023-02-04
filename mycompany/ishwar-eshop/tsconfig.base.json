@@ -18,7 +18,7 @@
       "@ishwar-eshop/orders": ["libs/orders/src/index.ts"],
       "@ishwar-eshop/products": ["libs/products/src/index.ts"],
       "@ishwar-eshop/ui": ["libs/ui/src/index.ts"],
-      "@ishwar-eshop/users": ["libs/users/src/index.ts"]
+      "@ishwar-eshop/users": ["libs/users/src/index.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]
