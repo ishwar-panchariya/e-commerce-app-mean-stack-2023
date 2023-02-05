@@ -9,7 +9,7 @@
                     <div class="p-toolbar-group-left"></div>
                     <div class="p-toolbar-group-right">
                         <p-button [label]="editMode ? 'Update' : 'Create'" icon="pi pi-plus" styleClass="p-button-raised p-button-info mr-2" (click)="onSubmit()"></p-button>
-                        <p-button label="Cancel" icon="pi pi-arrow-circle-left" styleClass="p-button-raised p-button-secondary"></p-button>
+                        <p-button label="Cancel" icon="pi pi-arrow-circle-left" styleClass="p-button-raised p-button-secondary" (click)="goBack()"></p-button>
                     </div>
                 </p-toolbar>
             </div>

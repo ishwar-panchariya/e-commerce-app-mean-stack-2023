@@ -14,9 +14,13 @@ import { NxWelcomeComponent } from './nx-welcome.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
+import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
+import { ProductsListComponent } from './pages/products/products-list/products-list.component';
+import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 
 // Services
-import { CategoriesService } from '@ishwar-eshop/products';
+import { CategoriesService, ProductsService } from '@ishwar-eshop/products';
 
 // PrimeNG Modules
 import { ButtonModule } from 'primeng/button';
@@ -28,12 +32,18 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ColorPickerModule } from 'primeng/colorpicker';
-import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
-import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { DropdownModule } from 'primeng/dropdown';
+import { EditorModule } from 'primeng/editor';
 
-const UX_MODULES = [ButtonModule, CardModule, ColorPickerModule, ConfirmDialogModule, InputTextModule, TableModule, ToastModule, ToolbarModule]
+
+const UX_MODULES = [
+  ButtonModule, CardModule, ColorPickerModule, ConfirmDialogModule, InputNumberModule, InputTextModule, TableModule, ToastModule, ToolbarModule,
+  InputTextareaModule, InputSwitchModule, DropdownModule, EditorModule]
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent, CategoriesFormComponent],
+  declarations: [AppComponent, NxWelcomeComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent, CategoriesFormComponent, ProductsListComponent, ProductsFormComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -43,7 +53,10 @@ const UX_MODULES = [ButtonModule, CardModule, ColorPickerModule, ConfirmDialogMo
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
     ...UX_MODULES
   ],
-  providers: [CategoriesService, MessageService, ConfirmationService],
+  providers: [
+    CategoriesService, MessageService, ConfirmationService,
+    ProductsService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
