@@ -17,7 +17,7 @@ export class CategoriesFormComponent implements OnInit {
   form! : FormGroup;
   isSubmitted = false;
   editMode = false;
-  currentCategorId: string;
+  currentCategoryId: string;
 
   constructor(private _fb: FormBuilder, 
               private _categoryService: CategoriesService, 
@@ -43,7 +43,7 @@ export class CategoriesFormComponent implements OnInit {
     this._route.params.subscribe(params => {
       if(params.id) {
         this.editMode = true
-        this.currentCategorId = params.id
+        this.currentCategoryId = params.id
         this._categoryService.getCategory(params.id).subscribe(category => {
           this.categoryForm['name'].setValue(category.name);
           this.categoryForm['icon'].setValue(category.icon);
@@ -66,7 +66,7 @@ export class CategoriesFormComponent implements OnInit {
     }
 
     const category: Category = {
-      id: this.currentCategorId,
+      id: this.currentCategoryId,
       name: this.form.controls['name'].value,
       icon: this.form.controls['icon'].value,
       color: this.form.controls['color'].value
@@ -117,6 +117,9 @@ export class CategoriesFormComponent implements OnInit {
     })
   }
 
-  
+  // back button 
+  goBack() {
+    this._location.back()
+  }
 
 }
