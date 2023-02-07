@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -25,6 +25,9 @@ import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detai
 
 // Services
 import { CategoriesService, ProductsService } from '@ishwar-eshop/products';
+
+// Library
+import { AuthGuard, JwtInterceptor, UsersModule } from '@ishwar-eshop/users';
 
 // PrimeNG Modules
 import { ButtonModule } from 'primeng/button';
@@ -57,11 +60,13 @@ const UX_MODULES = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
+    UsersModule,
     ...UX_MODULES
   ],
   providers: [
     CategoriesService, MessageService, ConfirmationService,
-    ProductsService
+    ProductsService, AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
   ],
   bootstrap: [AppComponent],
 })
