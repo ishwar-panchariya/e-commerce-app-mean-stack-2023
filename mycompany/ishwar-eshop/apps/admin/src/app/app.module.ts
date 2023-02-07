@@ -20,6 +20,8 @@ import { ProductsListComponent } from './pages/products/products-list/products-l
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { UsersFormComponent } from './pages/users/users-form/users-form.component';
+import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
+import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 
 // Services
 import { CategoriesService, ProductsService } from '@ishwar-eshop/products';
@@ -41,13 +43,13 @@ import { DropdownModule } from 'primeng/dropdown';
 import { EditorModule } from 'primeng/editor';
 import { TagModule } from 'primeng/tag';
 import { InputMaskModule } from 'primeng/inputmask';
-
+import { FieldsetModule } from 'primeng/fieldset';
 
 const UX_MODULES = [
   ButtonModule, CardModule, ColorPickerModule, ConfirmDialogModule, InputNumberModule, InputTextModule, TableModule, ToastModule, ToolbarModule,
-  InputTextareaModule, InputSwitchModule, DropdownModule, EditorModule, TagModule, InputMaskModule]
+  InputTextareaModule, InputSwitchModule, DropdownModule, EditorModule, TagModule, InputMaskModule, FieldsetModule]
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent, CategoriesFormComponent, ProductsListComponent, ProductsFormComponent, UsersListComponent, UsersFormComponent],
+  declarations: [AppComponent, NxWelcomeComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent, CategoriesFormComponent, ProductsListComponent, ProductsFormComponent, UsersListComponent, UsersFormComponent, OrdersListComponent, OrdersDetailComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
