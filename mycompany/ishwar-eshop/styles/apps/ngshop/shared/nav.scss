@@ -1,0 +1,17 @@
+.nav {
+    li {
+        display: inline-block;
+        list-style: none;
+        margin-right: 16px;
+
+        a {
+            text-decoration: none;
+            color: var(--surface-700);
+            cursor: pointer;
+
+            &:hover {
+                color: $primary-color;
+            }
+        }
+    }
+}

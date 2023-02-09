@@ -11,10 +11,13 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { UiModule } from '@ishwar-eshop/ui';
 import { AccordionModule } from 'primeng/accordion';
+import { NavComponent } from './shared/nav/nav.component';
+import { ProductsModule } from '@ishwar-eshop/products';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-  { path: 'products', component: ProductListComponent },
+  { path: 'products', component: ProductListComponent }
 ];
 @NgModule({
   declarations: [
@@ -24,8 +27,17 @@ const routes: Routes = [
     ProductListComponent,
     HeaderComponent,
     FooterComponent,
+    NavComponent,
   ],
-  imports: [BrowserModule, BrowserAnimationsModule, RouterModule.forRoot(routes), UiModule, AccordionModule],
+  imports: [
+    BrowserModule, 
+    BrowserAnimationsModule, 
+    RouterModule.forRoot(routes), 
+    HttpClientModule,
+    ProductsModule,
+    UiModule, 
+    AccordionModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
