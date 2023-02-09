@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User, UsersService } from '@ishwar-eshop/users';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'admin-users-list',
@@ -9,9 +10,10 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   styles: [
   ]
 })
-export class UsersListComponent implements OnInit {
+export class UsersListComponent implements OnInit, OnDestroy {
 
   users: User[] = []
+  endSubscription$: Subject<any> = new Subject();
 
   constructor(private userService: UsersService,
               private toaster: MessageService,
@@ -22,8 +24,12 @@ export class UsersListComponent implements OnInit {
     this._getUsersList();  
   }
 
+  ngOnDestroy() {
+    this.endSubscription$.complete()
+  }
+
   private _getUsersList() {
-    this.userService.getUsers().subscribe((res) => {
+    this.userService.getUsers().pipe(takeUntil(this.endSubscription$)).subscribe((res) => {
       this.users = res
     })
   }

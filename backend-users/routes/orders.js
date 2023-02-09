@@ -64,9 +64,7 @@ router.post('/', async (req,res)=>{
 
         return totalPrice
     }))
-
-    console.log(totalPrices)
-    
+   
     const totalPrice = totalPrices.reduce((a, b) => a + b, 0)
 
     let order = new Order({
@@ -119,11 +117,11 @@ router.get(`/get/totalsales`, async (req, res) =>{
 
 router.get(`/get/count`, async (req, res) =>{
     const orderCount = await Order.countDocuments((count) => count)
-
+    console.log(typeof orderCount)
     if(!orderCount) {
-        res.status(500).json({success: false})
+        return res.status(500).json({success: false})
     } 
-    res.send({
+    return res.send({
         orderCount: orderCount
     });
 })

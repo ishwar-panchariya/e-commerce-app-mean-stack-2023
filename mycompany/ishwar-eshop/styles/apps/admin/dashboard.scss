@@ -1,0 +1,43 @@
+.d-item {
+    display: flex;
+    text-align: center;
+    color: var(--surface-0);    
+    justify-content: space-between;
+
+    .pi {
+        font-size: 4em;
+        margin-bottom: 15px;
+    }
+
+    .name {
+        font-size: 1.4em;
+    }
+
+    .number {
+        margin-top: 50px;
+        font-size: 2em;
+    }
+} 
+
+.d-orders {
+    background: #EB3349;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F45C43, #EB3349);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #F45C43, #EB3349); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.d-products {
+    background: #4CB8C4;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #3CD3AD, #4CB8C4);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #3CD3AD, #4CB8C4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.d-users {
+    background: #DA22FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #9733EE, #DA22FF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #9733EE, #DA22FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.d-totalSales {
+    background-color: #FF9A8B;
+    background-image: linear-gradient(90deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%);
+}

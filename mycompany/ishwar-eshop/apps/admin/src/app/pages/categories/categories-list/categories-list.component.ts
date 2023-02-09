@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoriesService, Category } from '@ishwar-eshop/products';
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'admin-categories-list',
@@ -10,9 +11,10 @@ import { ConfirmationService } from 'primeng/api';
   styles: [
   ]
 })
-export class CategoriesListComponent implements OnInit {
+export class CategoriesListComponent implements OnInit, OnDestroy {
 
   categories: Category[] = []
+  endSubscription$: Subject<any> = new Subject();
 
   constructor(private _categoryService: CategoriesService,
               private _toaster: MessageService,
@@ -23,8 +25,12 @@ export class CategoriesListComponent implements OnInit {
     this._getCategoryList();  
   }
 
+  ngOnDestroy() {
+    this.endSubscription$.complete()
+  }
+
   private _getCategoryList() {
-    this._categoryService.getCategories().subscribe((res) => {
+    this._categoryService.getCategories().pipe(takeUntil(this.endSubscription$)).subscribe((res) => {
       this.categories = res
     })
   }

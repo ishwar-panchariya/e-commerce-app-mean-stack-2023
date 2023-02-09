@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from 'environment/environment';
 import { Order } from '../models/order.model';
 
@@ -36,5 +36,15 @@ export class OrdersService {
   // delete existing order
   deleteOrder(orderId: string): Observable<any> {
     return this.http.delete<any>(`${this.apiURLOrders}/${orderId}`)
+  }
+
+  // Get Order count
+  getOrderCount(): Observable<{ orderCount: number}> {
+    return this.http.get<{ orderCount: number}>(`${this.apiURLOrders}/get/count`).pipe()
+  }
+  
+  // Get Total sales count
+  getTotalSalesCount(): Observable<{totalsales: number}> {
+    return this.http.get<{totalsales: number}>(`${this.apiURLOrders}/get/totalsales`).pipe()
   }
 }
