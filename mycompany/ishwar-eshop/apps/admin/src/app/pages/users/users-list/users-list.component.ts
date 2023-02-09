@@ -1,46 +1,48 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product, ProductsService } from '@ishwar-eshop/products';
+import { User, UsersService } from '@ishwar-eshop/users';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'admin-products-list',
-  templateUrl: './products-list.component.html',
+  selector: 'admin-users-list',
+  templateUrl: './users-list.component.html',
+  styles: [
+  ]
 })
-export class ProductsListComponent implements OnInit, OnDestroy {
+export class UsersListComponent implements OnInit, OnDestroy {
 
-  products: Product[] = []
+  users: User[] = []
   endSubscription$: Subject<any> = new Subject();
 
-  constructor(private productService: ProductsService,
+  constructor(private userService: UsersService,
               private toaster: MessageService,
               private confirmationService: ConfirmationService,
               private router: Router) {}
 
   ngOnInit() {
-    this._getProductList();  
+    this._getUsersList();  
   }
 
   ngOnDestroy() {
     this.endSubscription$.complete()
   }
 
-  private _getProductList() {
-    this.productService.getProducts().pipe(takeUntil(this.endSubscription$)).subscribe((res) => {
-      this.products = res
+  private _getUsersList() {
+    this.userService.getUsers().pipe(takeUntil(this.endSubscription$)).subscribe((res) => {
+      this.users = res
     })
   }
 
-  deleteProduct(productId: string) {
+  deleteUser(userId: string) {
     this.confirmationService.confirm({
-      message: 'Do you want to delete this product?',
+      message: 'Do you want to delete this user?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.productService.deleteProduct(productId).subscribe(
+        this.userService.deleteUser(userId).subscribe(
           (response) => {
-            this._getProductList()
+            this._getUsersList()
             this.toaster.add({severity:'success', summary:'Success', detail: response.message });
           },
           (error) => {
@@ -52,8 +54,11 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     });
   }
 
-  updateProduct(productId: string) {
-    this.router.navigateByUrl(`products/form/${productId}`)
+  updateUser(userId: string) {
+    this.router.navigateByUrl(`users/form/${userId}`)
   }
 
+  getCountryName(countryKey: string) {
+    if(countryKey) return this.userService.getCountry(countryKey)
+  }
 }
