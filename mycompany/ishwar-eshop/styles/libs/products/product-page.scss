@@ -1,0 +1,56 @@
+.product {
+    &-name {
+        font-size: 2em;
+    }
+
+    &-desc {
+        font-size: 1.4em;
+    }
+
+    &-rating {
+        margin: 15px 0;
+    }
+
+    &-price {
+        font-size: 1.4em;
+        font-weight: 600;
+        border-bottom: 1px solid var(--surface-300);
+        padding: 25px 0;
+
+        .price-before {
+            font-size: 0.7em;
+            margin-left: 10px;
+            font-weight: 400;
+            color: var(--red-600);
+            text-decoration: line-through;
+        }
+    }
+    
+    &-quantity {
+        margin: 25px 0;
+
+        label {
+            font-size: 1.2em;
+        }
+
+        .p-button {
+            background-color: $primary-color;
+            border: 0;
+        }
+
+        .p-inputnumber-buttons-horizontal .p-inputnumber-input {
+            width: 50%;
+        }    
+    }
+
+    &-actions {
+        .p-button {
+            background-color: $primary-color;
+            border: 0;
+        }
+    }
+}
+
+.product-rich-desc {
+    line-height: 1.6;
+}
