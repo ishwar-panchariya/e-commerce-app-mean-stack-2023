@@ -13,6 +13,9 @@ import { AccordionModule } from 'primeng/accordion';
 import { NavComponent } from './shared/nav/nav.component';
 import { ProductsModule } from '@ishwar-eshop/products';
 import { HttpClientModule } from '@angular/common/http';
+import { OrdersModule } from '@ishwar-eshop/orders';
+import { MessageService } from 'primeng/api';
+
 
 const routes: Routes = [
   { path: '', component: HomePageComponent }
@@ -33,9 +36,10 @@ const routes: Routes = [
     HttpClientModule,
     ProductsModule,
     UiModule, 
-    AccordionModule
+    AccordionModule,
+    OrdersModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
