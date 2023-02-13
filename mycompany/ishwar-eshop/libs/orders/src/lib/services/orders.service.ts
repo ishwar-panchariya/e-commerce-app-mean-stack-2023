@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { environment } from 'environment/environment';
 import { Order } from '../models/order.model';
+import { OrderItem } from '../models/order-item.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { Order } from '../models/order.model';
 export class OrdersService {
 
   apiURLOrders = environment.apiUrl + 'orders'
+  apiURLProducts = environment.apiUrl + 'products'
 
   constructor(private http: HttpClient) { }
 
@@ -46,5 +48,15 @@ export class OrdersService {
   // Get Total sales count
   getTotalSalesCount(): Observable<{totalsales: number}> {
     return this.http.get<{totalsales: number}>(`${this.apiURLOrders}/get/totalsales`).pipe()
+  }
+
+  // get product by id
+  getProduct(productId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiURLProducts}/${productId}`)
+  }
+
+  // Create checkout session
+  createCheckoutSession(orderItem: OrderItem[]) {
+    return this.http.post(`${this.apiURLOrders}/create-checkout-session`, orderItem)
   }
 }

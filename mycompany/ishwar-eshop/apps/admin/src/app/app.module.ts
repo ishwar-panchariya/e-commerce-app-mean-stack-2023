@@ -47,6 +47,8 @@ import { EditorModule } from 'primeng/editor';
 import { TagModule } from 'primeng/tag';
 import { InputMaskModule } from 'primeng/inputmask';
 import { FieldsetModule } from 'primeng/fieldset';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 const UX_MODULES = [
   ButtonModule, CardModule, ColorPickerModule, ConfirmDialogModule, InputNumberModule, InputTextModule, TableModule, ToastModule, ToolbarModule,
@@ -60,6 +62,8 @@ const UX_MODULES = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     UsersModule,
     ...UX_MODULES
   ],
