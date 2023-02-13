@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from '@ishwar-eshop/users';
+import { Subject, take, takeUntil } from 'rxjs';
 import { Cart } from '../../models/cart.model';
 import { OrderItem } from '../../models/order-item.model';
 import { Order } from '../../models/order.model';
@@ -12,13 +13,14 @@ import { OrdersService } from '../../services/orders.service';
   selector: 'orders-checkout-page',
   templateUrl: './checkout-page.component.html'
 })
-export class CheckoutPageComponent implements OnInit {
+export class CheckoutPageComponent implements OnInit, OnDestroy {
 
   checkoutFormGroup!: FormGroup;
   isSubmitted = false;
   orderItems: OrderItem[] = [];
-  userId = '63e8db81c1df714544b6aedd';
+  userId!: string;
   countries = [];
+  unsubscribe$: Subject<any> = new Subject()
 
   constructor(
     private router: Router,
@@ -31,8 +33,13 @@ export class CheckoutPageComponent implements OnInit {
 
   ngOnInit(): void {
     this._initCheckoutForm();
+    this._autoFillUserData();
     this._getCartItems();
     this._getCountries();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.complete()
   }
 
   private _initCheckoutForm() {
@@ -46,6 +53,22 @@ export class CheckoutPageComponent implements OnInit {
       apartment: ['', Validators.required],
       street: ['', Validators.required]
     });
+  }
+
+  private _autoFillUserData() {
+    this.usersService.observeCurrentUser().pipe(takeUntil(this.unsubscribe$)).subscribe((user) => {
+      if(user) {
+        this.userId = user.id;
+        this.checkoutForm['name'].setValue(user.name);
+        this.checkoutForm['email'].setValue(user.email);
+        this.checkoutForm['phone'].setValue(user.phone);
+        this.checkoutForm['city'].setValue(user.city);
+        this.checkoutForm['country'].setValue(user.country);
+        this.checkoutForm['zip'].setValue(user.zip);
+        this.checkoutForm['apartment'].setValue(user.apartment);
+        this.checkoutForm['street'].setValue(user.street);
+      }
+    })
   }
 
   private _getCountries() {

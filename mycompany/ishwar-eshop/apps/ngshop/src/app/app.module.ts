@@ -12,9 +12,12 @@ import { UiModule } from '@ishwar-eshop/ui';
 import { AccordionModule } from 'primeng/accordion';
 import { NavComponent } from './shared/nav/nav.component';
 import { ProductsModule } from '@ishwar-eshop/products';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { OrdersModule } from '@ishwar-eshop/orders';
 import { MessageService } from 'primeng/api';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { JwtInterceptor } from '@ishwar-eshop/users';
 
 
 const routes: Routes = [
@@ -33,13 +36,15 @@ const routes: Routes = [
     BrowserModule, 
     BrowserAnimationsModule, 
     RouterModule.forRoot(routes), 
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     HttpClientModule,
     ProductsModule,
     UiModule, 
     AccordionModule,
     OrdersModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

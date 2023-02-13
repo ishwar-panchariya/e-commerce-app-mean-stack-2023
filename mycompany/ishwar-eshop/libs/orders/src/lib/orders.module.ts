@@ -15,6 +15,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
 import { ThankYouComponent } from './pages/thank-you/thank-you.component';
+import { AuthGuard, UsersModule } from '@ishwar-eshop/users';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutPageComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'success',
@@ -42,7 +44,8 @@ const routes: Routes = [
     InputMaskModule,
     InputTextModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UsersModule
   ],
   declarations: [CartIconComponent, CartPageComponent, OrderSummaryComponent, CheckoutPageComponent, ThankYouComponent],
   exports: [CartIconComponent, CartPageComponent, OrderSummaryComponent, CheckoutPageComponent, ThankYouComponent],
